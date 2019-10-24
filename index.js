@@ -1,3 +1,3 @@
-import * as Verto from "./src";
+import {ENUM, VertoClient, VertoView, generateGUID} from "./src";
 
-export default Verto;
+export {ENUM, VertoClient, VertoView, generateGUID};
