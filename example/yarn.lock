@@ -4230,7 +4230,7 @@ react-is@^16.8.1, react-is@^16.8.3, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
 
 "react-native-verto@file:..":
-  version "1.0.0"
+  version "0.1.1"
 
 react-native-webrtc@^1.75.1:
   version "1.75.1"

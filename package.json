@@ -1,8 +1,8 @@
 {
   "name": "react-native-verto",
   "title": "React Native Verto",
-  "version": "0.1.1",
-  "description": "TODO",
+  "version": "0.1.2",
+  "description": "Verto FreeSWITCH React Native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
