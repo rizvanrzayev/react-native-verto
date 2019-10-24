@@ -1,0 +1,39 @@
+{
+  "name": "react-native-verto",
+  "title": "React Native Verto",
+  "version": "0.1.1",
+  "description": "TODO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rizvanrzayev/react-native-verto.git",
+    "baseUrl": "https://github.com/rizvanrzayev/react-native-verto"
+  },
+  "keywords": [
+    "react-native",
+    "verto",
+    "react-native-verto",
+    "communicator",
+    "verto communicator"
+  ],
+  "author": {
+    "name": "Rizvan Rzayev",
+    "email": "rizvan@rzayev.ws"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x",
+    "react-native-webrtc": "^1.75.1"
+  },
+  "devDependencies": {
+    "react": "^16.8.3",
+    "react-native": "^0.59.10",
+    "react-native-webrtc": "^1.75.1"
+  }
+}
