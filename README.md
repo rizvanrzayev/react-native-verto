@@ -93,6 +93,7 @@ let vertoClient = new VertoClient(vertoParams, callbacks)
 ### METHODS
 
 **destroy**
+test
 
 ```javascript
 vertoClient.destroy()
