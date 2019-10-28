@@ -35,7 +35,8 @@ build/
 .gradle
 local.properties
 *.iml
-
+.env
+.env-test
 # BUCK
 buck-out/
 \.buckd/
