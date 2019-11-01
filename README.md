@@ -1,107 +1,52 @@
-# react-native-verto
+---
+description: Verto FreeSWITCH React Native
+---
 
-## Getting started
+# Getting Started
 
 ## Installation
 
-#### npm:
-`$ npm install react-native-verto --save`
-
-#### yarn:
-`$ yarn add react-native-verto`
-
-### For use this library you must be link `react-native-webrtc`
-
-React Native version < 0.60
-
-Follow `react-native-webrtc` installation from this [link](https://github.com/react-native-webrtc/react-native-webrtc/#installation):
-
-React Native version >= 0.60 (**auto-linking**)
-
-#### For iOS
-`cd ios/ && pod install && cd .. && react-native run-ios`
-
-#### For Android
-`react-native run-android`
-
-## Usage
-
-### VertoView
-
-```javascript
-import {VertoView} from 'react-native-verto';
-
-const vertoParams = {
-	websocket: {
-		login: '<username>@<wsHost>',
-		password: '<password>',
-		url: 'webSocketURL'
-	},
-	deviceParams: {
-		useMic: 'any',
-		useSpeak: 'any',
-		useCamera: 'any',
-	}
-}
-
-const callbacks = {
-	onPrivateEvent: (vertoClient, dataParams, userData) => {},
-	onEvent: (vertoClient, dataParams, userData) => {},
-	onInfo: (params) => {},
-	onClientReady: (params) => {},
-	onNewCall: (call: Call) => {},
-	onPlayLocalVideo: (stream: MediaStream) => {},
-	onPlayRemoteVideo: (stream: MediaStream) => {},
-}
-
-return(
-	<VertoView vertoParams={vertoParams} callbacks={callbacks}/>
-)
+{% tabs %}
+{% tab title="npm" %}
+```text
+$ npm install react-native-verto --save
 ```
+{% endtab %}
 
-### VertoClient
-
-```javascript
-import {VertoClient} from 'react-native-verto';
-
-const vertoParams = {
-	websocket: {
-		login: '<username>@<wsHost>',
-		password: '<password>',
-		url: 'webSocketURL'
-	},
-	deviceParams: {
-		useMic: 'any',
-		useSpeak: 'any',
-		useCamera: 'any',
-	}
-}
-
-const callbacks = {
-	onPrivateEvent: (vertoClient, dataParams, userData) => {},
-	onEvent: (vertoClient, dataParams, userData) => {},
-	onInfo: (params) => {},
-	onClientReady: (params) => {},
-	onNewCall: (call: Call) => {},
-	onPlayLocalVideo: (stream: MediaStream) => {},
-	onPlayRemoteVideo: (stream: MediaStream) => {},
-}
-
-let vertoClient = new VertoClient(vertoParams, callbacks)
+{% tab title="yarn" %}
+```text
+$ yarn add react-native-verto
 ```
+{% endtab %}
+{% endtabs %}
 
-### METHODS
+{% hint style="info" %}
+_For use this library you must be link:_ [**react-native-webrtc**](https://github.com/react-native-webrtc/react-native-webrtc)\*\*\*\*
+{% endhint %}
 
-**destroy**
+#### If you are using **React-Native** version &lt; **0.60**:
 
-```javascript
-vertoClient.destroy()
+Follow `react-native-webrtc` installation from this [**link**](https://github.com/react-native-webrtc/react-native-webrtc/#installation)**.**
+
+#### React-Native &gt;= 0.60 \(auto-linking\):
+
+{% tabs %}
+{% tab title="iOS" %}
+```bash
+cd ios/ && pod install && cd .. && react-native run-ios
 ```
+{% endtab %}
 
-### Callbacks
+{% tab title="Android" %}
+```bash
+react-native run-android
+```
+{% endtab %}
+{% endtabs %}
 
-* `onInfo`
-* `onClientReady`
-* `onNewCall`
-* `onPlayLocalVideo`
-* `onPlayRemoteVideo`
+#### Todo list:
+
+* [ ] Complete documentation.
+* [ ] New Verto View
+* [ ] Refactoring
+
