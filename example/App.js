@@ -10,7 +10,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import {} from 'react-native-verto';
+import {VertoClient} from 'react-native-verto';
 import VertoView from 'react-native-verto/src/vertoView';
 
 export default class App extends Component<{}> {
@@ -35,7 +35,6 @@ export default class App extends Component<{}> {
       useSpeak: 'any',
       useCamera: 'any',
     }
-    let vertoClient = new VertoClient()
     return (
       <View style={styles.container}>
         <VertoView vertoParams={{webSocket, deviceParams, remoteVideo: 'remote-video', localVideo: 'local-video',}} callbacks={{onNewCall: (call) => {
