@@ -1,7 +1,7 @@
 {
   "name": "react-native-verto",
   "title": "React Native Verto",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Verto FreeSWITCH React Native",
   "main": "index.js",
   "scripts": {
