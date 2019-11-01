@@ -44,9 +44,12 @@ const callbacks = ...
 return (<VertoView vertoParams={vertoParams} callbacks={callbacks}/>);
 ```
 
-{% hint style="info" %}
- **VertoView** using [vertoParams](usage.md#vertoparams) and [callbacks](usage.md#callbacks)
-{% endhint %}
+<div class="alert alert-info hints-alert">
+  <div class="hints-icon"><i class="fa fa-info"></i></div>
+  <div class="hints-container">
+    <p>Important info: this note needs to be highlighted</p>
+  </div>
+</div>
 
 ## VertoClient
 
