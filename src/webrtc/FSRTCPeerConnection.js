@@ -8,6 +8,9 @@
  */
 
 import {RTCPeerConnection, RTCSessionDescription} from 'react-native-webrtc';
+import BackgroundTimer from 'react-native-background-timer';
+
+BackgroundTimer.start();
 
 export default class FSRTCPeerConnection {
   constructor(options) {
@@ -59,7 +62,7 @@ export default class FSRTCPeerConnection {
       }
 
       if (!this.gathering) {
-        this.gathering = setTimeout(iceHandler, 1000);
+        this.gathering = BackgroundTimer.setTimeout(iceHandler, 1000);
       }
 
       if (!event) {
