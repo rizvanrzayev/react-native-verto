@@ -10,6 +10,9 @@ import VertoRTC from '../webrtc/VertoRTC';
 import {printError, printWarning} from '../common/utils';
 import {generateGUID, ENUM} from './utils';
 import {Clipboard} from 'react-native';
+import BackgroundTimer from 'react-native-background-timer';
+
+BackgroundTimer.start();
 
 export default class Call {
   constructor(direction, verto, params, mediaHandlers = {}) {
@@ -362,7 +365,7 @@ export default class Call {
 
     this.verto.ringer.play();
 
-    setTimeout(() => {
+    BackgroundTimer.setTimeout(() => {
       this.stopRinging();
       if (this.state === ENUM.state.ringing) {
         this.indicateRing();
