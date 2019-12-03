@@ -542,6 +542,7 @@ export default class VertinhoClient {
 
     if (this.webSocket)
       delete this.webSocket;
+    this.webSocket = null;
     if (this.retryingTimer)
       clearTimeout(this.retryingTimer);
   }
