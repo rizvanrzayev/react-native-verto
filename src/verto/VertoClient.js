@@ -12,7 +12,9 @@ import ConferenceLiveArray from '../conference/ConferenceLiveArray';
 import {printError, printWarning} from '../common/utils';
 import {generateGUID, ENUM} from './utils';
 import {Params, defaultVertoCallbacks, eventType} from '../store';
+import BackgroundTimer from 'react-native-background-timer';
 
+BackgroundTimer.start();
 let sessionIDCache;
 
 export default class VertinhoClient {
@@ -22,6 +24,7 @@ export default class VertinhoClient {
     const defaultCallback = x => x;
     this.callbacks = {
       onClientReady: defaultCallback,
+      onClientClose: defaultCallback,
       onConferenceReady: defaultCallback,
       onConferenceDisabled: defaultCallback,
       onInfo: defaultCallback,
@@ -127,8 +130,12 @@ export default class VertinhoClient {
     this.webSocket.onmessage = this.onWebSocketMessage.bind(this);
 
     this.webSocket.onclose = () => {
-      printWarning('WebSocket closed, attempting to connect again in 1s.');
-      this.retryingTimer = setTimeout(this.connectSocket.bind(this), 1000);
+      printWarning('WebSocket closed, attempting to connect again in 10s.');
+      this.callbacks.onClientClose();
+      this.retryingTimer = BackgroundTimer.setTimeout(() => {
+        if(this.webSocket != null)
+          this.connectSocket();
+      }, 10000);      
     };
 
     this.webSocket.onopen = () => {
@@ -532,6 +539,12 @@ export default class VertinhoClient {
     } else {
       printError('Tried to close a not ready socket while destroying.');
     }
+
+    if (this.webSocket)
+      delete this.webSocket;
+    this.webSocket = null;
+    if (this.retryingTimer)
+      clearTimeout(this.retryingTimer);
   }
 
   hangup(callId) {
