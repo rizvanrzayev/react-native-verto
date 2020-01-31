@@ -133,6 +133,7 @@ export default class VertinhoClient {
       printWarning('WebSocket closed, attempting to connect again in 10s.');
       this.callbacks.onClientClose();
       this.retryingTimer = BackgroundTimer.setTimeout(() => {
+        if(this.webSocket != null)
           this.connectSocket();
       }, 10000);      
     };
