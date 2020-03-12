@@ -69,7 +69,7 @@ export default class FSRTCPeerConnection {
         this.done = true;
 
         if (this.gathering) {
-          clearTimeout(this.gathering);
+          BackgroundTimer.clearTimeout(this.gathering);
           this.gathering = null;
         }
 
