@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "react": "^16.8.3",
-    "react-native": "^0.59.10",
+    "react-native": "^0.62.3",
     "react-native-webrtc": "^1.75.1",
     "react-native-background-timer": "^2.1.1"
   }
