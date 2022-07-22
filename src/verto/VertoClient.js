@@ -130,12 +130,12 @@ export default class VertinhoClient {
     this.webSocket.onmessage = this.onWebSocketMessage.bind(this);
 
     this.webSocket.onclose = () => {
-      printWarning('WebSocket closed, attempting to connect again in 10s.');
+      printWarning('WebSocket closed, attempting to connect again in 5s.');
       this.callbacks.onClientClose();
       this.retryingTimer = BackgroundTimer.setTimeout(() => {
         if(this.webSocket != null)
           this.connectSocket();
-      }, 10000);      
+      }, 5000);      
     };
 
     this.webSocket.onopen = () => {
@@ -183,7 +183,8 @@ export default class VertinhoClient {
       };
     }
 
-    this.webSocket.send(requestStringified);
+    if(this.webSocket != null)
+      this.webSocket.send(requestStringified);
   }
 
   handleJSONRPCMessage(message) {
@@ -254,13 +255,15 @@ export default class VertinhoClient {
       return;
     }
 
-    this.webSocket.send(
-      JSON.stringify({
-        jsonrpc: '2.0',
-        id: fixedEvent.eventData.id,
-        result: reply,
-      }),
-    );
+    if(this.webSocket != null){
+      this.webSocket.send(
+        JSON.stringify({
+          jsonrpc: '2.0',
+          id: fixedEvent.eventData.id,
+          result: reply,
+        }),
+      );
+    }
   }
 
   handleMessage(data) {
@@ -393,7 +396,13 @@ export default class VertinhoClient {
 
   handleMessageForCall(data) {
     const existingCall = this.calls[data.params.callID];
-    if (existingCall) {
+   
+    if (data.method === "verto.attach" && existingCall) {
+      delete this.calls[data.params.callID];
+      existingCall.rtc.stop();
+    }
+
+    if (this.calls[data.params.callID]) {
       switch (data.method) {
         case 'verto.bye':
           existingCall.hangup(data.params);
@@ -426,15 +435,24 @@ export default class VertinhoClient {
     ) {
       const useVideo = data.params.sdp && data.params.sdp.indexOf('m=video') > 0;
       const useStereo = data.params.sdp && data.params.sdp.indexOf('stereo=1') > 0;
-      const newCall = new Call(ENUM.direction.inbound, this, {
-        ...data.params,
-        attach: false,
-        useVideo,
-        useStereo
-      });
-      this.callbacks.onNewCall(newCall);
       if (data.method === 'verto.attach') {
+        const newCall = new Call(ENUM.direction.inbound, this, {
+          ...data.params,
+          attach: true,
+          useVideo,
+          useStereo
+        });
+        printWarning('handleMessageForCall set recovering')
         newCall.setState(ENUM.state.recovering);
+        //this.callbacks.onRecoveryCall(newCall);
+      }else{
+        const newCall = new Call(ENUM.direction.inbound, this, {
+          ...data.params,
+          attach: false,
+          useVideo,
+          useStereo
+        });
+        this.callbacks.onNewCall(newCall);
       }
     } else {
       printWarning('Ignoring call event with invalid method', data.method);
