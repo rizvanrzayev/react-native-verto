@@ -19,7 +19,7 @@ export default class Call {
     this.direction = direction;
     this.verto = verto;
     this.params = {
-      callID: generateGUID(),
+      //callID: generateGUID(),
       useVideo: verto.options.useVideo,
       useStereo: verto.options.useStereo,
       screenShare: false,
@@ -43,6 +43,9 @@ export default class Call {
 
     this.lastState = ENUM.state.new;
     this.state = this.lastState;
+    
+    if(this.params.callID === undefined)
+      this.params.callID = generateGUID();
 
     this.verto.calls[this.params.callID] = this;
 
@@ -230,6 +233,7 @@ export default class Call {
     this.verto.callbacks.onCallStateChange({
       previous: this.lastState,
       current: this.state,
+      callID: this.params.callID
     });
 
     const speaker = this.params.useSpeak;
