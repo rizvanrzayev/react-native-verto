@@ -551,6 +551,8 @@ export default class VertinhoClient {
   }
 
   destroy() {
+    if (this.retryingTimer)
+      clearTimeout(this.retryingTimer);
     if (this.socketReady()) {
       this.webSocket.close();
       this.purge();
@@ -561,8 +563,6 @@ export default class VertinhoClient {
     if (this.webSocket)
       delete this.webSocket;
     this.webSocket = null;
-    if (this.retryingTimer)
-      clearTimeout(this.retryingTimer);
   }
 
   hangup(callId) {
