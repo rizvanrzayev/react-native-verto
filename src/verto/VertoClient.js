@@ -149,11 +149,10 @@ export default class VertinhoClient {
   }
 
   socketReady() {
-    if (this.webSocket === null || this.webSocket.readyState > 1) {
+    if (this.webSocket != null && this.webSocket.readyState === 1)
+      return true;
+    else
       return false;
-    }
-
-    return true;
   }
 
   purge() {
