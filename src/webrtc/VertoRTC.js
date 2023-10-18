@@ -274,8 +274,6 @@ export default class VertoRTC {
     }
 
     const mediaConstraints = this.getMediaParams();
-    if(typeof mediaConstraints.audio != 'boolean')
-      mediaConstraints.audio = true;
     mediaDevices
       .getUserMedia(mediaConstraints)
       .then(stream => {
