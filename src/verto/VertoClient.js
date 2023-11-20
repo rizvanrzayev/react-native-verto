@@ -149,11 +149,10 @@ export default class VertinhoClient {
   }
 
   socketReady() {
-    if (this.webSocket === null || this.webSocket.readyState > 1) {
+    if (this.webSocket != null && this.webSocket.readyState === 1)
+      return true;
+    else
       return false;
-    }
-
-    return true;
   }
 
   purge() {
@@ -551,6 +550,8 @@ export default class VertinhoClient {
   }
 
   destroy() {
+    if (this.retryingTimer)
+      clearTimeout(this.retryingTimer);
     if (this.socketReady()) {
       this.webSocket.close();
       this.purge();
@@ -561,8 +562,6 @@ export default class VertinhoClient {
     if (this.webSocket)
       delete this.webSocket;
     this.webSocket = null;
-    if (this.retryingTimer)
-      clearTimeout(this.retryingTimer);
   }
 
   hangup(callId) {
