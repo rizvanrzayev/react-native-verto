@@ -75,6 +75,9 @@ export default class Call {
         this.ring();
       }
     }
+
+    this.causeCode = null;
+    this.cause = null;
   }
 
   bootstrapRealtimeConnection() {
@@ -264,7 +267,13 @@ export default class Call {
 
       case ENUM.state.hangup:
         if (isAfterRequesting && isBeforeHangup) {
-          this.broadcastMethod('verto.bye', {});
+          var params = {};
+          if (this.cause != null && this.causeCode != null)
+            params = { causeCode:this.causeCode, cause: this.cause };
+
+          this.broadcastMethod('verto.bye', params);
+          this.causeCode = null;
+          this.cause = null;
         }
 
         this.setState(ENUM.state.destroy);
@@ -333,7 +342,7 @@ export default class Call {
       this.cause = params.cause;
     }
 
-    if (!this.cause && !this.causeCode) {
+    if (this.cause === null && this.causeCode === null) {
       this.cause = 'NORMAL_CLEARING';
     }
 
